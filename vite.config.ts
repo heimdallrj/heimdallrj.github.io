@@ -10,9 +10,16 @@ export default defineConfig(({ command }: ConfigEnv) => {
 
   const plugins: PluginOption[] = [
     react(),
+
     viteStaticCopy({
       targets: [{
-        src: '__blog__',
+        src: '__posts__',
+        dest: '.'
+      }]
+    }),
+    viteStaticCopy({
+      targets: [{
+        src: '__pages__',
         dest: '.'
       }]
     }),
@@ -29,10 +36,10 @@ export default defineConfig(({ command }: ConfigEnv) => {
   // Add dev-only plugin safely
   if (isDev) {
     plugins.push({
-      name: 'watch-blog-routes',
+      name: 'watch-static-routes',
       apply: 'serve',
       configureServer(server) {
-        const watcher = chokidar.watch('./__blog__', { ignoreInitial: true })
+        const watcher = chokidar.watch(['./__posts__', './__pages__'], { ignoreInitial: true });
 
         const onChange = (path: string) => {
           generateRoutes()

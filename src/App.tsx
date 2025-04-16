@@ -9,7 +9,7 @@ function App() {
   const [content, setContent] = useState("")
 
   async function load() {
-    const url = "https://raw.githubusercontent.com/heimdallrj/heimdallrj.github.io/refs/heads/gh-pages/__blog__/2025-01-01/1735723445-hello.md";
+    const url = "https://raw.githubusercontent.com/heimdallrj/heimdallrj.github.io/refs/heads/gh-pages/__posts__/2025-01-01/1735723445-hello.md";
     const response = await fetch(url)
     const markdown = await response.text()
     setContent(markdown)
